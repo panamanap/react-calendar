@@ -1,26 +1,29 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Calendar } from './components/Calendar';
+import { Footer } from './components/Footer';
+import { Header } from './components/Header';
+import { Modal } from './components/Modal';
+import { Orders } from './components/Orders';
+import { Reservation } from './components/Reservation';
+import { modal } from './store/modal';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = observer(() => {
+    return (
+        <div className="app-wrapper">
+            <Modal condition={modal.reservationModal}>
+                <Reservation />
+            </Modal>
+            <Modal condition={modal.ordersModal}>
+                <Orders/>
+            </Modal>
+            <div className="app">
+                <Header />
+                <Calendar />
+                <Footer />
+            </div>
+        </div>
+    );
+});
 
 export default App;

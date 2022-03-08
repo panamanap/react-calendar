@@ -1,0 +1,23 @@
+@import '../constants';
+
+.footer {
+    margin-top: 10px;
+    padding: 10px 50px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__reservation-list {
+        cursor: pointer;
+        color: #555;
+        border-bottom: 1px dashed #555;
+
+        &:hover {
+            opacity: 0.7;
+        }
+
+        &:active {
+           opacity: 0.6;
+        }
+    }
+}

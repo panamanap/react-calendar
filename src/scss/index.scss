@@ -1,0 +1,28 @@
+@import './libs/normalize';
+
+@import './constants';
+
+@import './components/all';
+
+body {
+    background-color: $background-app;
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%));
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.app-wrapper {
+    position: relative;
+    
+    .app {
+        margin: 30px auto;
+        min-height: 600px;
+        max-width: 800px;
+        background-color: $background-calendar;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 5px #333;
+        
+    }
+}
