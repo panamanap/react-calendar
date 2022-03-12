@@ -1,16 +1,14 @@
-export const checkValidation = (email: string, name: string) => {
-    if (!email || !name) {
-        alert(
-            `Enter your${!email ? ' email' : ''}${!name ? ' name' : ''}`
-        );
-        return;
+export const checkValidation = (name: string, text: string) => {
+    console.log(text);
+    if(!text) {
+        return
     }
-    if (!email.match(/.+@.+\..+/i)) {
+    if (name === 'email' && !text.match(/.+@.+\..+/i)) {
         alert('Please enter a valid email!');
-        return;
+        return true;
     }
-    if (!name.match(/[^\d]/g)) {
+    if (name === 'name' &&  !text.match(/[^\d]/g)) {
         alert('Please enter a valid name!');
-        return;
+        return true;
     }
 }

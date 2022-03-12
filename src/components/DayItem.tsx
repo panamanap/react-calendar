@@ -39,18 +39,24 @@ const DayItem: React.FC<DayItemProps> = ({
         }
     };
 
+    const userId = user.orders.findIndex((order) => order.id === uid);
+
     const [currentDay, currentMonth, currentYear] = useCurrentDate();
     const dayClass = (day: number, type: string, ordered: boolean) =>
         classNames({
             [type]: true,
             week__day: true,
             'week__current-day':
-                    day === +currentDay &&
+                day === +currentDay &&
                 date.month + 1 === +currentMonth &&
                 date.year === +currentYear,
             'week__another-month': type === 'prev' || type === 'next',
             week__ordered: ordered,
         });
+    const timeClass = classNames({
+        week__time: !ordered,
+        'week__time-visible': ordered,
+    });
 
     const price = offDay ? '30p' : '10p';
 
@@ -61,13 +67,10 @@ const DayItem: React.FC<DayItemProps> = ({
                 onChangeMonth(event, uid, price)
             }
         >
-            <p className={ordered ? 'week__name': 'week__price'}>
-                {ordered
-                    ? user.orders[
-                          user.orders.findIndex((order) => order.id === uid)
-                      ].name
-                    : price}
+            <p className={ordered ? 'week__name' : 'week__price'}>
+                {ordered ? user.orders[userId].name : price}
             </p>
+            <p className={timeClass}>{ordered && user.orders[userId].time}</p>
             <p className="week__number">{day}</p>
         </div>
     );

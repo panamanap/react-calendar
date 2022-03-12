@@ -1,8 +1,11 @@
+@import '../constants';
+
 @mixin title-modal {
     border: 1px solid #333;
     text-align: center;
     width: 100%;   
     padding: 10px;
+    overflow: auto;
 }
 
 .modal-wrapper {
@@ -15,11 +18,11 @@
     align-items: center;
     z-index: 1;
     margin-top: -30px;
+    user-select: none;
 
     .wrapper {
         background-color: #fff;
         width: 350px;
-        height: 250px;
         border-radius: 10px;
         padding: 20px 25px;
         display: flex;
@@ -27,19 +30,16 @@
         justify-content: center;
         
         .modal__header {
-            width: 100%;
-            height: 25px;
             display: flex;
-           
             justify-content: space-between;
             align-items: center;
             user-select: none;
+            margin-bottom: 5px;
 
             .modal__registration {
                 flex-grow: 1;
                 display: flex;
                 justify-content: center;
-                
             }
             
             .modal__close {
@@ -57,6 +57,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+
+            .modal__reservation-time {
+                display: flex;
+                justify-content: space-between;
+            }
         }
 
         .modal__orders {
@@ -75,9 +80,22 @@
             .modal__user {
                 display: flex;
                 justify-content: space-between;
+               
 
                 p {
                     @include title-modal();
+
+                    &::-webkit-scrollbar {
+                        background-color: $background-app;
+                        height: 7px;
+                        border-top: 1px solid #333;
+                    }
+
+                    &::-webkit-scrollbar-thumb{
+                        border-radius: 5px;
+                        border: 1px solid #bbb;
+                        background: #ccc;
+                    }
                 }
             }
         }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useCurrentDate } from '../hooks/useCurrentDate';
 import { modal } from '../store/modal';
 import { user } from '../store/users';
 import { checkValidation } from '../utils/checkValidation';
@@ -7,10 +6,9 @@ import { Button } from './UI/Button';
 import { Input } from './UI/Input';
 
 export const Reservation = () => {
-    const [email, setEmail] = React.useState('');
-    const [name, setName] = React.useState('');
-
-    const [a, b, c, currentHour, currentMinute] = useCurrentDate();
+    const [email, setEmail] = React.useState<string>('');
+    const [name, setName] = React.useState<string>('');
+    const [time, setTime] = React.useState<string>('');
 
     const onCloseModal = () => {
         user.saveParams('', '');
@@ -18,22 +16,43 @@ export const Reservation = () => {
     };
 
     const onSaveOrder = () => {
-        const condition =
-            modal.checkingTime
-
-            console.log('condition', condition);
-        checkValidation(email, name);
-
-        if (condition) {
-            checkValidation(email, name);
-            user.addOrder(email, name);
-            modal.openReservation(false);
-            setEmail('');
-            setName('');
+        if (!email || !name || !time) {
+            alert('Empty fields!');
             return;
-        } else alert('Wrong time! Toggle switch states or wait');
+        }
+        user.addOrder(email, name, time);
+        modal.openReservation(false);
+        setEmail(''); setName('');
+        return;
     };
 
+    const onChangeText = (value: string, name: string) => {
+        if(name === 'email') {
+            setEmail(value)            
+        }
+        else if(name === 'name') {
+            setName(value);
+        }
+    };
+
+    const onBlurInput = (value: string, name: string) => {
+        if (checkValidation(name, value)) {
+            name === 'email' && setEmail('');
+            name === 'name' && setName('')
+        } 
+    }
+    
+    const onChangeFirst = () => {
+        setTime('10.00')
+    }
+
+    const onChangeSecond = () => {
+        setTime('12.00')
+    }
+
+    const onChangeThird = () => {
+        setTime('14.00')
+    }
 
     return (
         <div className="modal-wrapper" onClick={onCloseModal}>
@@ -51,10 +70,49 @@ export const Reservation = () => {
                 </div>
                 <div className="modal__form">
                     <Input
+                        name="email"
+                        type="text"
                         placeholder="Your email..."
-                        setUserValue={setEmail}
+                        onChange={onChangeText}
+                        value={email}
+                        onBlur={onBlurInput}
                     />
-                    <Input placeholder="Your name..." setUserValue={setName} />
+                    <Input
+                        name="name"
+                        type="text"
+                        placeholder="Your name..."
+                        onChange={onChangeText}
+                        value={name}
+                        onBlur={onBlurInput}
+                    />
+                    <div>
+                        <h5 className="modal__time">
+                            Select reservation time:
+                        </h5>
+                        <div className="modal__reservation-time">
+                            <Input
+                                name="time"
+                                type="radio"
+                                value="10.00"
+                                onChange={onChangeFirst}
+                                checked = {time === '10.00'}
+                            />
+                            <Input
+                                name="time"
+                                type="radio"
+                                value="12.00"
+                                onChange={onChangeSecond}
+                                checked = {time === '12.00'}
+                            />
+                            <Input
+                                name="time"
+                                type="radio"
+                                value="14.00"
+                                onChange={onChangeThird}
+                                checked = {time === '14.00'}
+                            />
+                        </div>
+                    </div>
                     <Button onClick={onSaveOrder}>Reserve</Button>
                 </div>
             </div>

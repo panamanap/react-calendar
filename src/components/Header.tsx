@@ -4,7 +4,6 @@ import { date } from '../store/date';
 import { modal } from '../store/modal';
 import { months } from '../utils/constants';
 import { Button } from './UI/Button';
-import { Switch } from './UI/Switch';
 
 export const Header = observer(() => {
     const onPrevMonth = () => {
@@ -29,13 +28,6 @@ export const Header = observer(() => {
             </div>
             <div className="header__additional">
                 <h2 className="header__year">{date.year}</h2>
-                <div className="check-time">
-                    <p>Check the time?</p>
-                    <Switch
-                        condition={modal.checkingTime}
-                        onClick={onCheckTime}
-                    />
-                </div>
             </div>
         </header>
     );

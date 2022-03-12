@@ -24,6 +24,16 @@
         display: grid;
         grid-template-columns: repeat(7 , 5fr);
        
+        .week__time {
+            display: none;
+            text-align: center;
+        } 
+
+        .week__name {
+            width: 100%;
+            word-wrap: break-word;
+            text-align: center;
+         }
 
         &__day {
             border: 1px solid #333;
@@ -44,6 +54,11 @@
                word-wrap: break-word;
                text-align: center;
             }
+
+            .week__time-visible {
+                width: 100%;
+                text-align: center;
+            }
         }
 
         &__current-day {
@@ -52,12 +67,6 @@
             .week__number {
                 font-weight: bold;
             }
-
-            .week__name {
-                width: 100%;
-                word-wrap: break-word;
-                text-align: center;
-             }
         }
 
         &__another-month {
@@ -66,12 +75,6 @@
             .week__number, .week__price {
                 opacity: 0.3;
             }
-
-            .week__name {
-                width: 100%;
-                word-wrap: break-word;
-                text-align: center;
-             }
         } 
 
         &__ordered {

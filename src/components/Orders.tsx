@@ -25,11 +25,13 @@ export const Orders = () => {
                     <div className='modal__title'>
                         <p>Name</p>
                         <p>Price</p>
+                        <p>Time</p>
                     </div>
                     {user.usersData.map((user) => (
                         <div className="modal__user" key={user.name}>
                             <p>{user.name}</p>
                             <p>{user.price}p.</p>
+                            <p>{user.time}</p>
                         </div>
                     ))}
                 </div>
